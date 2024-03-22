@@ -46,7 +46,6 @@ def draw():
 
     update()
 
-
 def move():
     """Move ball and targets."""
     if randrange(40) == 0:
@@ -60,6 +59,12 @@ def move():
     if inside(ball):
         speed.y -= 0.35
         ball.move(speed)
+    else:
+        # Mover el balon dentro de la pantalla
+        ball.x = -199
+        ball.y = -199
+        speed.x = 0
+        speed.y = 0
 
     dupe = targets.copy()
     targets.clear()
@@ -72,7 +77,7 @@ def move():
 
     for target in targets:
         if not inside(target):
-            return
+            targets.remove(target)  # Eliminar blancos que salieron de la pantalla
 
     ontimer(move, 50)
 
